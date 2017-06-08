@@ -10,7 +10,7 @@ fi
 . apache-init.sh
 
 ## install project with git
-if [ "$PROJECT_VCS_METHOD" == git ]; then
+if [ "$PROJECT_VCS_METHOD" = git ]; then
     if [ -n "$PROJECT_VCS_URL" ]; then
         cd "$PROJECT_WORKDIR"
         git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "./$PROJECT_APPDIR"
