@@ -9,7 +9,7 @@ fi
 . $APACHE_ENVVARS
 
 # create project dir
-. docker-project-init.sh
+. project-init
 
 chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$PROJECT_WORKDIR"
 

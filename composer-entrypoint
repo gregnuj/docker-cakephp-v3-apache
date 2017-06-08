@@ -5,8 +5,8 @@ if [ ! -z "$DEBUG" ]; then
 fi
 
 ## Set up environment
-. docker-project-init.sh
-. docker-apache-init.sh
+. project-init
+. apache-init
 
 ## install project
 if [ ! -z "$PROJECT_VCS" ]; then 
@@ -19,11 +19,7 @@ if [ ! -z "$PROJECT_NAME" ]; then
       --prefer-source \
       --no-interaction \
       --keep-vcs \
-      $PROJECT_NAME $PROJECT_WORKDIR
+      $PROJECT_REPO/$PROJECT_NAME $PROJECT_WORKDIR
 fi
 
-if [ -f ~/.ssh/config ]; then
-    sed -i "s/StrictHostKeyChecking no/StrictHostKeyChecking yes/"  ~/.ssh/config
-fi
-
-exec "$@"
+exec entrypoint "$@"
