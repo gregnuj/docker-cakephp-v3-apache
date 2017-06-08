@@ -9,7 +9,7 @@ fi
 . $APACHE_ENVVARS
 
 # create project dir
-. project-init
+. project-init.sh
 
 chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$PROJECT_WORKDIR"
 
