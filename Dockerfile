@@ -53,14 +53,10 @@ ENV \
     PROJECT_VCS_URL="" \
     PROJECT_VCS_BRANCH="master" 
 
-## Create init scripts
-COPY *-init /usr/local/bin/
-RUN chmod 755 /usr/local/bin/*-init
-
-## Create entrypoint scripts
-COPY *entrypoint /usr/local/bin/
-RUN chmod 755 /usr/local/bin/*entrypoint
+## Copy entrypoint script(s)
+COPY *.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/*.sh
 
 EXPOSE 80
-ENTRYPOINT ["/usr/local/bin/composer-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
