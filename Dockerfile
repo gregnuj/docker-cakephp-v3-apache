@@ -62,5 +62,5 @@ COPY *entrypoint /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*entrypoint
 
 EXPOSE 80
-ENTRYPOINT ["/usr/local/bin/entrypoint"]
+ENTRYPOINT ["/usr/local/bin/composer-entrypoint"]
 CMD ["apache2-foreground"]
