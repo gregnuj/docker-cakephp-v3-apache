@@ -16,9 +16,10 @@ if [ "$PROJECT_VCS_METHOD" = git ]; then
         git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "./$PROJECT_APPDIR"
         chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "./$PROJECT_APPDIR"
         cd "./$PROJECT_APPDIR"
-        if [ -f composer.json ]; then
-            composer update
-        fi
+        #does not work
+        #if [ -f composer.json ]; then
+        #    composer update
+        #fi
     fi
 
 ## install project with composer
