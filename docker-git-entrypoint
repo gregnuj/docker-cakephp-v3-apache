@@ -1,33 +1,22 @@
-#!/bin/sh
-set -e
+#!/bin/sh -e
 
-. $APACHE_ENVVARS
-
-# create project dir
-if [ -n "$PROJECT_WORKDIR" ]; then
-   mkdir -p "$PROJECT_WORKDIR"
-   cd "$PROJECT_WORKDIR"
+# Enable debugging
+if [ ! -z "$DEBUG" ]; then
+    set -x
 fi
 
-# add key to user dir
-mkdir -p ~/.ssh 
-if [ -n "$PROJECT_VCS_HOST" ]; then  
-    echo "\nHost $PROJECT_VCS_HOST" >> ~/.ssh/config
-    echo "\tBatchMode yes" >> ~/.ssh/config
-    echo "\tStrictHostKeyChecking no" >> ~/.ssh/config
-    echo "\tPreferredAuthentications publickey" >> ~/.ssh/config
-    [ -z "$PROJECT_VCS_RSA" ] || echo "\n\tIdentityFile $PROJECT_VCS_RSA" >> ~/.ssh/config
-fi
+# Set up environment
+. docker-project-init.sh
+. docker-apache-init.sh
 
 ## install project
 if [ -n "$PROJECT_VCS_URL" ]; then
     git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "./$PROJECT_APPDIR"
+    chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "./$PROJECT_APPDIR"
 fi
 
 if [ -f ~/.ssh/config ]; then
     sed -i "s/StrictHostKeyChecking no/StrictHostKeyChecking yes/"  ~/.ssh/config
 fi
-
-chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "./$PROJECT_APPDIR"
 
 exec "$@"

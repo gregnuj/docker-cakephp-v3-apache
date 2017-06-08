@@ -6,8 +6,8 @@ LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 RUN apt-get update \
     && apt-get install -y \
     bash curl git \
-    libmcrypt4 libicu52 \
-    libmcrypt-dev g++ libicu-dev zlib1g-dev git libxml2-dev \
+    g++ libmcrypt4 libicu52 zlib1g-dev \
+    libmcrypt-dev libicu-dev libxml2-dev libpq-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

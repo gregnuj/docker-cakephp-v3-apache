@@ -1,0 +1,29 @@
+#!/bin/sh-e
+
+if [ ! -z "$DEBUG" ]; then
+    set -x
+fi
+
+## Set up environment
+. docker-project-init.sh
+. docker-apache-init.sh
+
+## install project
+if [ ! -z "$PROJECT_VCS" ]; then 
+    /usr/bin/composer config --global repositories.0 "{\"type\": \"vcs\", \"url\": \"$PROJECT_VCS_URL\"}"
+fi
+
+if [ ! -z "$PROJECT_NAME" ]; then 
+    /usr/bin/composer create-project \
+      --stability=dev \
+      --prefer-source \
+      --no-interaction \
+      --keep-vcs \
+      $PROJECT_NAME $PROJECT_WORKDIR
+fi
+
+if [ -f ~/.ssh/config ]; then
+    sed -i "s/StrictHostKeyChecking no/StrictHostKeyChecking yes/"  ~/.ssh/config
+fi
+
+exec "$@"
