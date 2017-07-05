@@ -57,7 +57,8 @@ ENV \
 COPY *.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
 
-## Enable apachemods
+## Enable mod rewrite
+RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
 
 EXPOSE 80
