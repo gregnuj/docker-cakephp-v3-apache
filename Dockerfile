@@ -5,7 +5,7 @@ LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 ## Install project requirements
 RUN apt-get update \
     && apt-get install -y \
-    bash curl git openssh-client \
+    bash curl git vim openssh-client \
     g++ libmcrypt4 libicu52 zlib1g-dev \
     libmcrypt-dev libicu-dev libxml2-dev libpq-dev \
     && apt-get clean \
