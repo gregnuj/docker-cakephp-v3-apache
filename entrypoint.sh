@@ -15,8 +15,9 @@ if [ "$PROJECT_VCS_METHOD" = git ]; then
         cd "$PROJECT_WORKDIR"
         git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "./$PROJECT_APPDIR"
         chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP ./$PROJECT_APPDIR
-        if [ -f composer.json ]; then
-            composer update -d ./$PROJECT_APPDIR
+        cd "$PROJECT_APPDIR"
+        if [ -f "./composer.json" ]; then
+            composer update
         fi
     fi
 
@@ -35,7 +36,6 @@ else
           $PROJECT_REPO/$PROJECT_NAME $PROJECT_WORKDIR
     fi
 fi
-
 
 # Enable StrictHostKeyChecking (disabled in project-init)
 if [ -f $HOME/.ssh/config ]; then
