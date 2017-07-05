@@ -12,12 +12,12 @@ if [ -n "$PROJECT_WORKDIR" ]; then
 fi
 
 # add key to user dir
-mkdir -p ~/.ssh
+mkdir -p $HOME/.ssh
 if [ -n "$PROJECT_VCS_HOST" ]; then
-    echo "\nHost $PROJECT_VCS_HOST" >> ~/.ssh/config
-    echo "\tBatchMode yes" >> ~/.ssh/config
-    echo "\tStrictHostKeyChecking no" >> ~/.ssh/config
-    echo "\tPreferredAuthentications publickey" >> ~/.ssh/config
-    [ -z "$PROJECT_VCS_RSA" ] || echo "\n\tIdentityFile $PROJECT_VCS_RSA" >> ~/.ssh/config
+    echo "\nHost $PROJECT_VCS_HOST" >> $HOME/.ssh/config
+    echo "\tBatchMode yes" >> $HOME/.ssh/config
+    echo "\tStrictHostKeyChecking no" >> $HOME/.ssh/config
+    echo "\tPreferredAuthentications publickey" >> $HOME/.ssh/config
+    [ -z "$PROJECT_VCS_RSA" ] || echo "\n\tIdentityFile $PROJECT_VCS_RSA" >> $HOME/.ssh/config
 fi
 
