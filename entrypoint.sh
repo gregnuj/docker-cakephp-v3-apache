@@ -38,7 +38,7 @@ else
 fi
 
 # Modify DocumentRoot
-sed -i 's/DocumentRoot \/var\/www\/html/&\/goset/' /etc/apache2/sites-available/*default*
+sed -i "s|DocumentRoot /var/www/html|&/${PROJECT_APPDIR}|" /etc/apache2/sites-available/*default*
 
 # Enable StrictHostKeyChecking (disabled in project-init)
 if [ -f $HOME/.ssh/config ]; then
