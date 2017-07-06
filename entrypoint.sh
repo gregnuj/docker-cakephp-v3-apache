@@ -3,6 +3,7 @@
 # Enable debugging
 if [ ! -z "$DEBUG" ]; then
     set -x
+    env
 fi
 
 # Set up environment

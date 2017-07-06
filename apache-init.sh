@@ -8,5 +8,3 @@ fi
 # Import apache environment
 . $APACHE_ENVVARS
 
-# create project dir
-. project-init.sh
