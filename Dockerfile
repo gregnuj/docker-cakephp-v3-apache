@@ -53,13 +53,13 @@ ENV \
     PROJECT_VCS_URL="" \
     PROJECT_VCS_BRANCH="master" 
 
-## Copy entrypoint script(s)
-COPY *.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/*.sh
-
 ## Enable mod rewrite
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
+
+## Copy entrypoint script(s)
+COPY *.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/*.sh
 
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
