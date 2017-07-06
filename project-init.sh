@@ -7,8 +7,8 @@ fi
 
 # create project dir
 if [ -n "$PROJECT_WORKDIR" ]; then
-   mkdir -p "$PROJECT_WORKDIR"
-   cd "$PROJECT_WORKDIR"
+   mkdir -p $PROJECT_WORKDIR
+   cd $PROJECT_WORKDIR
 fi
 
 # add key to user dir
