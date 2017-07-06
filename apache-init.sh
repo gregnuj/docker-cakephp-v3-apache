@@ -11,5 +11,5 @@ fi
 # create project dir
 . project-init.sh
 
-chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$PROJECT_WORKDIR"
+chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP $PROJECT_WORKDIR
 
