@@ -13,8 +13,8 @@ fi
 if [ "$PROJECT_VCS_METHOD" = git ]; then
     if [ -n "$PROJECT_VCS_URL" ]; then
         cd "$PROJECT_WORKDIR"
-        git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "./$PROJECT_APPDIR"
-        chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "./$PROJECT_APPDIR"
+        git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" ./$PROJECT_APPDIR
+        chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP ./$PROJECT_APPDIR
         cd "$PROJECT_APPDIR"
         if [ -f "./composer.json" ]; then
             composer update
