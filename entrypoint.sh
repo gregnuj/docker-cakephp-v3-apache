@@ -13,9 +13,7 @@ fi
 ## install project with git
 if [ "$PROJECT_VCS_METHOD" = git ]; then
     if [ -n "$PROJECT_VCS_URL" ]; then
-        cd $PROJECT_WORKDIR
-        git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" ./$PROJECT_APPDIR
-        cd $PROJECT_APPDIR
+        git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "$(readlink -m .)"
         if [ -f "./composer.json" ]; then
             composer update
         fi
@@ -33,12 +31,12 @@ else
           --prefer-source \
           --no-interaction \
           --keep-vcs \
-          $PROJECT_REPO/$PROJECT_NAME $PROJECT_WORKDIR
+          $PROJECT_REPO/$PROJECT_NAME "$(readlink -m ..)"
     fi
 fi
 
 # Insure proper permissions
-chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP $PROJECT_WORKDIR
+chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$(readlink -m ..)"
 
 # Modify DocumentRoot
 #sed -i "s|DocumentRoot /var/www/html|&/${PROJECT_APPDIR}|" /etc/apache2/sites-available/*default*

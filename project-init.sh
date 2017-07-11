@@ -5,12 +5,6 @@ if [ ! -z "$DEBUG" ]; then
     set -x
 fi
 
-# create project dir
-if [ -n "$PROJECT_WORKDIR" ]; then
-   mkdir -p $PROJECT_WORKDIR
-   cd $PROJECT_WORKDIR
-fi
-
 # add key to user dir
 mkdir -p $HOME/.ssh
 if [ -n "$PROJECT_VCS_HOST" ]; then
