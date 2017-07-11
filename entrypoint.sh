@@ -38,9 +38,6 @@ fi
 # Insure proper permissions
 chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$(readlink -m ..)"
 
-# Modify DocumentRoot
-#sed -i "s|DocumentRoot /var/www/html|&/${PROJECT_APPDIR}|" /etc/apache2/sites-available/*default*
-
 # Enable StrictHostKeyChecking (disabled in project-init)
 if [ -f $HOME/.ssh/config ]; then
     sed -i "s/StrictHostKeyChecking no/StrictHostKeyChecking yes/"  $HOME/.ssh/config

@@ -47,7 +47,6 @@ RUN curl -s -f -L -o /tmp/installer.php https://raw.githubusercontent.com/compos
 ENV \
     PROJECT_REPO="cakephp" \
     PROJECT_NAME="cakephp:3.*" \
-    PROJECT_APPDIR="app" \
     PROJECT_VCS_HOST="" \
     PROJECT_VCS_RSA="" \
     PROJECT_VCS_URL="" \
