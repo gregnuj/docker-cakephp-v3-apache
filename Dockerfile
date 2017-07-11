@@ -8,6 +8,8 @@ RUN apt-get update \
     bash curl git vim openssh-client \
     g++ libmcrypt4 libicu52 zlib1g-dev \
     libmcrypt-dev libicu-dev libxml2-dev libpq-dev \
+    # you probably don't need this
+    openjdk-8-jdk \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
