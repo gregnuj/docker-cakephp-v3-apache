@@ -23,10 +23,6 @@ if [ "$PROJECT_VCS_METHOD" = git ]; then
 else
     if [ ! -z "$PROJECT_VCS_URL" ]; then
         /usr/bin/composer config --global repositories.0 "{\"type\": \"vcs\", \"url\": \"$PROJECT_VCS_URL\"}"
-        /usr/bin/composer config --global repositories.0.type "vcs"
-        /usr/bin/composer config --global repositories.0.url "$PROJECT_VCS_URL"
-        /usr/bin/composer config --global repositories.0.options.ssh2.username "$PROJECT_VCS_USER"
-        /usr/bin/composer config --global repositories.0.options.ssh2.privkey_file "$PROJECT_VCS_RSA"
     fi
 
     if [ ! -z "$PROJECT_NAME" ]; then
