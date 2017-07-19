@@ -21,10 +21,6 @@ if [ "$PROJECT_VCS_METHOD" = git ]; then
 
 ## install project with composer
 else
-    if [ ! -z "$PROJECT_VCS_URL" ]; then
-        /usr/bin/composer config --global repositories.0 "{\"type\": \"vcs\", \"url\": \"$PROJECT_VCS_URL\"}"
-    fi
-
     if [ ! -z "$PROJECT_NAME" ]; then
         /usr/bin/composer create-project \
           --stability=dev \
