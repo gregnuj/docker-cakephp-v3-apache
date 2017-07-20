@@ -16,7 +16,7 @@ RUN apt-get update \
 RUN docker-php-ext-install \
     mcrypt \
     mbstring \
-    oci \
+    oci8 \
     pdo_mysql \
     pdo_pgsql \
     intl \
