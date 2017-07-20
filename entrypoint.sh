@@ -7,6 +7,8 @@ if [ ! -z "$DEBUG" ]; then
 fi
 
 # Set up environment
+. apt-init.sh
+. oci-init.sh
 . project-init.sh
 . apache-init.sh
 
