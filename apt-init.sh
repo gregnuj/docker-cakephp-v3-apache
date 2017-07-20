@@ -4,10 +4,10 @@ APT_CONF="${APT_CONF:="/etc/apt/apt.conf"}"
 APT_CONF_D="${APT_CONF_D:="${APT_CONF}.d"}"
 APT_CONF_PROXIES="${APT_CONF_PROXIES:="${APT_CONF_D}/proxies"}"
 
-if [ -n "$HTTP_PROXY" ] then
+if [ -n "$HTTP_PROXY" ]; then
     echo "Acquire::http::proxy \"$HTTP_PROXY\";" >> $APT_CONF_PROXIES
 fi
-if [ -n "$HTTPS_PROXY" ] then
+if [ -n "$HTTPS_PROXY" ]; then
     echo "Acquire::https::proxy \"$HTTPS_PROXY\";" >> $APT_CONF_PROXIES
 fi
 
