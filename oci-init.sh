@@ -3,7 +3,7 @@
 if [ -n "$ENABLE_OCI8" ]; then
     CLIENT_ZIP="/opt/src/instantclient-basiclite-linux.x64-12.2.0.1.0.zip"
 
-    export ORACLE_BASE /usr/lib/instantclient_12_1
+    export ORACLE_BASE="/usr/lib/instantclient_12_2"
     export LD_LIBRARY_PATH="$ORACLE_BASE"
     export TNS_ADMIN="$ORACLE_BASE" 
     export ORACLE_HOME=="$ORACLE_BASE"
