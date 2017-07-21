@@ -10,9 +10,9 @@ if [ -n "$ENABLE_OCI8" ]; then
 
 
     if [ -f "$ORACLE_CLIENT_ZIP" ]; then
-        unzip -d $ORACLE_BASE $ORACLE_CLIENT_ZIP
-        ln -s $ORACLE_BASE/libclntsh.so.12.1 $(readlink -m $ORACLE_BASE/../libclntsh.so) 
-        ln -s $ORACLE_BASE/libocci.so.12.1 $(readlink -m $ORACLE_BASE/../libocci.so)
+        unzip $ORACLE_CLIENT_ZIP -d $(readlink -m $ORACLE_BASE/../)
+        ln -s $ORACLE_BASE/libclntsh.so.12.2 $(readlink -m $ORACLE_BASE/../libclntsh.so) 
+        ln -s $ORACLE_BASE/libocci.so.12.2 $(readlink -m $ORACLE_BASE/../libocci.so)
         ln -s $ORACLE_BASE/libociei.so $(readlink -m $ORACLE_BASE/../libociei.so)
         ln -s $ORACLE_BASE/libnnz12.so $(readlink -m $ORACLE_BASE/../libnnz12.so)
     fi
