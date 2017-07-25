@@ -10,7 +10,7 @@ if [ -n "$ENABLE_OCI8" ]; then
     export ORACLE_HOME=="$ORACLE_BASE"
 
 
-    if [ -f "$ORACLE_CLIENT_ZIP" ]; then
+    if [ -f $ORACLE_CLIENT_ZIP ]; then
         unzip $ORACLE_CLIENT_ZIP -d $(readlink -m $ORACLE_BASE/../)
         ln -s $ORACLE_BASE/libclntsh.so.12.2 $(readlink -m $ORACLE_BASE/../libclntsh.so) 
         ln -s $ORACLE_BASE/libocci.so.12.2 $(readlink -m $ORACLE_BASE/../libocci.so)
