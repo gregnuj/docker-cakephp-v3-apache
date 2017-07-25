@@ -1,7 +1,8 @@
 #!/bin/sh
 
+ORACLE_CLIENT_ZIP="${ORACLE_CLIENT_ZIP:="/opt/src/instantclient-basiclite-linux.x64-12.2.0.1.0.zip"}"
+
 if [ -n "$ENABLE_OCI8" ]; then
-    ORACLE_CLIENT_ZIP="/opt/src/instantclient-basiclite-linux.x64-12.2.0.1.0.zip"
 
     export ORACLE_BASE="/usr/lib/instantclient_12_2"
     export LD_LIBRARY_PATH="$ORACLE_BASE"
