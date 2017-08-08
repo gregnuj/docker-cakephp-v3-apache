@@ -21,6 +21,9 @@ RUN docker-php-ext-install \
     soap \
     zip 
 
+RUN pecl install ssh2 \
+    && docker-php-ext-enable ssh2
+
 ## Set up composer enviroment
 ENV PATH="/composer/vendor/bin:$PATH" \
     COMPOSER_ALLOW_SUPERUSER=1 \
@@ -29,18 +32,18 @@ ENV PATH="/composer/vendor/bin:$PATH" \
 
 ## Install composer
 RUN curl -s -f -L -o /tmp/installer.php https://raw.githubusercontent.com/composer/getcomposer.org/da290238de6d63faace0343efbdd5aa9354332c5/web/installer \
-   && php -r " \
-      \$signature = '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410'; \
-      \$hash = hash('SHA384', file_get_contents('/tmp/installer.php')); \
-      if (!hash_equals(\$signature, \$hash)) { \
-          unlink('/tmp/installer.php'); \
-          echo 'Integrity check failed, installer is either corrupt or worse.' . PHP_EOL; \
-          exit(1); \
-      }" \
-   && php /tmp/installer.php --no-ansi --install-dir=/usr/bin --filename=composer --version=${COMPOSER_VERSION} \
-   && rm /tmp/installer.php \
-   && composer self-update \
-   && composer --ansi --version --no-interaction
+    && php -r " \
+        \$signature = '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410'; \
+        \$hash = hash('SHA384', file_get_contents('/tmp/installer.php')); \
+        if (!hash_equals(\$signature, \$hash)) { \
+            unlink('/tmp/installer.php'); \
+            echo 'Integrity check failed, installer is either corrupt or worse.' . PHP_EOL; \
+            exit(1); \
+        }" \
+    && php /tmp/installer.php --no-ansi --install-dir=/usr/bin --filename=composer --version=${COMPOSER_VERSION} \
+    && rm /tmp/installer.php \
+    && composer self-update \
+    && composer --ansi --version --no-interaction
 
 ## Set up project enviroment
 ENV \
