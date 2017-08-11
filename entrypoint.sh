@@ -11,6 +11,7 @@ fi
 . oci-init.sh
 . project-init.sh
 . apache-init.sh
+. crunz-init.sh
 
 ## install project with git
 if [ "$PROJECT_VCS_METHOD" = git ]; then
