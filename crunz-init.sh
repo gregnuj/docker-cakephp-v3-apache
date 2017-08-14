@@ -11,4 +11,5 @@ CRON_CMD="${CRON_CMD:="* * * * * root $WORKDIR/vendor/lavary/crunz/crunz schedul
 
 mkdir -p ${CRON_DIR}
 echo "${CRON_CMD}" > ${CRON_FILE}
+chmod 755 ${CRON_FILE}
 
