@@ -63,6 +63,9 @@ RUN a2enmod rewrite
 COPY *.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
 
+## cake.php uses /usr/bin/php
+RUN ln -s /usr/local/bin/php /usr/bin/php
+
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
