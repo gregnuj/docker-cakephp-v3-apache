@@ -20,6 +20,7 @@ RUN docker-php-ext-install \
     pdo_pgsql \
     intl \
     soap \
+    sockets \
     zip 
 
 RUN pecl install ssh2 \
