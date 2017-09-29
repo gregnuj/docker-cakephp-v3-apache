@@ -44,7 +44,7 @@ RUN npm install -g grunt --save-dev
 ENV \
     PROJECT_REPO="cakephp" \
     PROJECT_NAME="cakephp:3.*" \
-    PROJECT_VCS_HOST="" \
+    PROJECT_VCS_HOST="github.com" \
     PROJECT_VCS_RSA="" \
     PROJECT_VCS_URL="" \
     PROJECT_VCS_BRANCH="master" 
