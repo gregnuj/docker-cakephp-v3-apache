@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+
+# git example
+  web-git:
+    image: gregnuj/cakephp-v3-apache:latest
+    working_dir: /var/www/html/my_project
+    environment:
+      - PROJECT_VCS_METHOD=git
+      - PROJECT_VCS_BRANCH=master
+      - PROJECT_VCS_URL=https://github.com/cakephp/app.git
+    networks:
+      default:
+    ports:
+      - 80:80
+
+# composer example
+  web-composer:
+    image: gregnuj/cakephp-v3-apache:latest
+    working_dir: /var/www/html/my_project
+    environment:
+      - PROJECT_VCS_METHOD=composer
+      - PROJECT_VCS_BRANCH=master
+      - PROJECT_REPO=cakephp
+      - PROJECT_NAME=app
+    networks:
+      default:
+    ports:
+      - 80:80
+
