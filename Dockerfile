@@ -34,7 +34,7 @@ ENV PATH="/composer/vendor/bin:$PATH" \
     COMPOSER_VERSION=1.3.3
 
 ## Install composer
-RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer \
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --ansi --version --no-interaction
 
 ## Install npm
