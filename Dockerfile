@@ -9,7 +9,7 @@ RUN apt-get update \
     bash cron curl git socat unzip vim openssh-client \
     g++ libmcrypt4 libicu52 zlib1g-dev \
     libmcrypt-dev libicu-dev libxml2-dev libpq-dev \
-    libssh2-1-dev \
+    libssh2-1-dev libz-dev libmemcached-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -25,8 +25,9 @@ RUN docker-php-ext-install \
     sockets \
     zip 
 
-RUN pecl install ssh2 \
-    && docker-php-ext-enable ssh2
+RUN pecl install ssh2 memcached \
+    && docker-php-ext-enable ssh2 \
+    && docker-php-ext-enable memcached
 
 ## Set up composer enviroment
 ENV PATH="/composer/vendor/bin:$PATH" \
