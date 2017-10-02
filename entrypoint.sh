@@ -5,7 +5,7 @@ if [ ! -z "$DEBUG" ]; then
     set -x
 fi
 
-declare -x WORKDIR="$(readlink -m .)"
+export WORKDIR="$(readlink -m .)"
 
 ## install project with git
 if [ ! "$(ls -A ${WORKDIR})" ]; then
