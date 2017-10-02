@@ -29,6 +29,7 @@ RUN pecl install memcached redis ssh2 \
     && docker-php-ext-enable redis \
     && docker-php-ext-enable ssh2
 
+
 ## Set up composer enviroment
 ENV PATH="/composer/vendor/bin:$PATH" \
     COMPOSER_ALLOW_SUPERUSER=1 \
