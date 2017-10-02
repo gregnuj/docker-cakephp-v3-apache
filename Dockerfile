@@ -16,7 +16,6 @@ RUN apt-get update \
 ## Install project php extensions
 RUN docker-php-ext-install \
     mcrypt \
-    memcached \
     mbstring \
     pdo_mysql \
     pdo_pgsql \
