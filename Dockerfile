@@ -25,9 +25,10 @@ RUN docker-php-ext-install \
     sockets \
     zip 
 
-RUN pecl install ssh2 memcached \
-    && docker-php-ext-enable ssh2 \
-    && docker-php-ext-enable memcached
+RUN pecl install memcached redis ssh2 \
+    && docker-php-ext-enable memcached \
+    && docker-php-ext-enable redis \
+    && docker-php-ext-enable ssh2 
 
 ## Set up composer enviroment
 ENV PATH="/composer/vendor/bin:$PATH" \
