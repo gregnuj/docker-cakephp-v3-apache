@@ -40,7 +40,10 @@ ENV PATH="/composer/vendor/bin:$PATH" \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --ansi --version --no-interaction
 
-## Install npm
+## Install bower
+RUN npm install -g bower --save-dev
+
+## Install grunt
 RUN npm install -g grunt --save-dev
 
 ## Set up project enviroment
