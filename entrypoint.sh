@@ -8,24 +8,30 @@ fi
 export WORKDIR="$(readlink -m .)"
 
 ## install project with git
-if [ ! "$(ls -A ${WORKDIR})" ]; then
-    if [ "$PROJECT_VCS_METHOD" = git ]; then
-        if [ -n "$PROJECT_VCS_URL" ]; then
+if [ "$PROJECT_VCS_METHOD" = git ]; then
+    if [ -n "$PROJECT_VCS_URL" ]; then
+        if [ ! "$(ls -A ${WORKDIR})" ]; then
             git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "$(readlink -m .)"
-            if [ -f "./composer.json" ]; then
-                composer update
-            fi
+        else
+            git pull
         fi
+        if [ -f "./composer.json" ]; then
+            composer update
+        fi
+    fi
 
-    ## install project with composer
-    elif [ "$PROJECT_VCS_METHOD" = composer ]; then
-        if [ ! -z "$PROJECT_NAME" ]; then
+## install project with composer
+elif [ "$PROJECT_VCS_METHOD" = composer ]; then
+    if [ ! -z "$PROJECT_NAME" ]; then
+        if [ ! "$(ls -A ${WORKDIR})" ]; then
             /usr/bin/composer create-project \
                 --stability=dev \
                 --prefer-source \
                 --no-interaction \
                 --keep-vcs \
                 $PROJECT_REPO/$PROJECT_NAME:dev-$PROJECT_VCS_BRANCH "$(readlink -m ..)"
+        elif [ -f "./composer.json" ]; then
+            composer update
         fi
     fi
 fi
