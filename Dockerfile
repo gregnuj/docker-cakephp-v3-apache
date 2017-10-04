@@ -22,13 +22,12 @@ RUN docker-php-ext-install \
     intl \
     soap \
     sockets \
-    zip
+    zip 
 
-RUN pecl install memcached-3.0.3 redis ssh2 \
+RUN pecl install memcached-2.2.0 redis ssh2 \
     && docker-php-ext-enable memcached \
     && docker-php-ext-enable redis \
-    && docker-php-ext-enable ssh2
-
+    && docker-php-ext-enable ssh2 
 
 ## Set up composer enviroment
 ENV PATH="/composer/vendor/bin:$PATH" \
@@ -40,20 +39,17 @@ ENV PATH="/composer/vendor/bin:$PATH" \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --ansi --version --no-interaction
 
+## cake.php uses /usr/bin/php
+RUN ln -s /usr/local/bin/php /usr/bin/php
+
+## apt installs node as nodejs 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
 ## Install bower
 RUN npm install -g bower --save-dev
 
 ## Install grunt
 RUN npm install -g grunt --save-dev
-
-## Set up project enviroment
-ENV \
-    PROJECT_REPO="cakephp" \
-    PROJECT_NAME="cakephp:3.*" \
-    PROJECT_VCS_HOST="github.com" \
-    PROJECT_VCS_RSA="" \
-    PROJECT_VCS_URL="" \
-    PROJECT_VCS_BRANCH="master"
 
 ## Enable mod rewrite
 RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
@@ -63,10 +59,16 @@ RUN a2enmod rewrite
 COPY *.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/*.sh
 
-## cake.php uses /usr/bin/php
-RUN ln -s /usr/local/bin/php /usr/bin/php
+## Set up project enviroment
+ENV \
+    PROJECT_REPO="cakephp" \
+    PROJECT_NAME="cakephp:3.*" \
+    PROJECT_VCS_HOST="github.com" \
+    PROJECT_VCS_RSA="" \
+    PROJECT_VCS_URL="" \
+    PROJECT_VCS_BRANCH="master" 
+
 
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
-
