@@ -39,11 +39,25 @@ ENV PATH="/composer/vendor/bin:$PATH" \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --ansi --version --no-interaction
 
+## cake.php uses /usr/bin/php
+RUN ln -s /usr/local/bin/php /usr/bin/php
+
+## apt installs node as nodejs 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
 ## Install bower
 RUN npm install -g bower --save-dev
 
 ## Install grunt
 RUN npm install -g grunt --save-dev
+
+## Enable mod rewrite
+RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+RUN a2enmod rewrite
+
+## Copy entrypoint script(s)
+COPY *.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/*.sh
 
 ## Set up project enviroment
 ENV \
@@ -54,16 +68,6 @@ ENV \
     PROJECT_VCS_URL="" \
     PROJECT_VCS_BRANCH="master" 
 
-## Enable mod rewrite
-RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
-RUN a2enmod rewrite
-
-## Copy entrypoint script(s)
-COPY *.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/*.sh
-
-## cake.php uses /usr/bin/php
-RUN ln -s /usr/local/bin/php /usr/bin/php
 
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
