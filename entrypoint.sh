@@ -47,4 +47,15 @@ if [ "${1#-}" != "$1" ]; then
         set -- apache2-foreground "$@"
 fi
 
+# link env path
+if [ -n "${NETWORK_ENV}" ]; then 
+    ln -s "$(readlink -m ${WORKDIR}/../)" "$(readlink -m ${WORKDIR}/../${NETWORK_ENV})"
+fi
+
+# link service path
+if [ -n "${SERVICE_PATH}" ]; then 
+    ln -s "${WORKDIR}" "$(readlink -m ${WORKDIR}/../${SERVICE_PATH}})"
+fi
+
 exec "$@"
+
