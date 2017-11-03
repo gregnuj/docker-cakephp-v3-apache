@@ -13,7 +13,7 @@ if [ "$PROJECT_VCS_METHOD" = git ]; then
         if [ ! "$(ls -A ${WORKDIR})" ]; then
             git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "$(readlink -m .)"
         else
-            git stash "container restart $(date +"%F_%T")"
+            git stash save "container restart $(date +"%F_%T")"
             git pull
         fi
         if [ -f "./composer.json" ]; then
