@@ -58,5 +58,8 @@ if [ -n "${SERVICE_PATH}" ]; then
     ln -s "${WORKDIR}" "$(readlink -m ${WORKDIR}/../${SERVICE_PATH}})"
 fi
 
+# store env for reuse in cron
+printenv | sed 's/^\(.*\)$/export \1/g' >> /etc/environment
+
 exec "$@"
 
