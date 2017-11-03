@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Enable debugging
-if [ ! -z "$DEBUG" ]; then
+if [ -n "$DEBUG" ]; then
     set -x
 fi
 
@@ -59,7 +59,7 @@ if [ -n "${SERVICE_PATH}" ]; then
 fi
 
 # store env for reuse in cron
-printenv | sed 's/^\(.*\)$/export \1/g' >> /etc/environment
+printenv | awk -F '=' '/G/{print "export "$1"=\""$2"\""}' >> /etc/environment
 
 exec "$@"
 
