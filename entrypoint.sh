@@ -55,7 +55,7 @@ fi
 
 # link service path
 if [ -n "${SERVICE_PATH}" ]; then 
-    ln -s "${WORKDIR}" "$(readlink -m ${WORKDIR}/../${SERVICE_PATH}})"
+    ln -s "${WORKDIR}" "$(readlink -m ${WORKDIR}/../${SERVICE_PATH})"
 fi
 
 # store env for reuse in cron
