@@ -54,8 +54,8 @@ if [ -n "${NETWORK_ENV}" ]; then
 fi
 
 # link service path
-if [ -n "${ALT_PATH}" ]; then 
-    LINKTO="$(readlink -m ${WORKDIR}/../${ALT_PATH})"
+if [ -n "${APP_ALIAS}" ]; then 
+    LINKTO="$(readlink -m ${WORKDIR}/../${APP_ALIAS})"
     if [ ! -e ${LINKTO} ]; then
         ln -s "${WORKDIR}" "${LINKTO}"
     fi
