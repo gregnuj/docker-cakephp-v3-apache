@@ -55,7 +55,10 @@ fi
 
 # link service path
 if [ -n "${SERVICE_PATH}" ]; then 
-    ln -s "${WORKDIR}" "$(readlink -m ${WORKDIR}/../${SERVICE_PATH})"
+    LINKTO="$(readlink -m ${WORKDIR}/../${SERVICE_PATH})"
+    if [ ! -e ${LINKTO} ]; then
+        ln -s "${WORKDIR}" "${LINKTO}"
+    fi
 fi
 
 # store env for reuse in cron
