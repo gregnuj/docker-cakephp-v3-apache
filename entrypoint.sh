@@ -48,11 +48,6 @@ if [ "${1#-}" != "$1" ]; then
         set -- apache2-foreground "$@"
 fi
 
-# link env path
-if [ -n "${NETWORK_ENV}" ]; then 
-    ln -s "$(readlink -m ${WORKDIR}/../)" "$(readlink -m ${WORKDIR}/../${NETWORK_ENV})"
-fi
-
 # link service path
 if [ -n "${APP_ALIAS}" ]; then 
     LINKTO="$(readlink -m ${WORKDIR}/../${APP_ALIAS})"
