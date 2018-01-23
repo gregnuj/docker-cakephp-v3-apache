@@ -57,7 +57,7 @@ if [ -n "${APP_ALIAS}" ]; then
 fi
 
 # store env for reuse in cron
-printenv | egrep -v '^(_|PWD|PHP)' | awk -F '=' '{print "export "$1"=\""$2"\""}' > /etc/environment
+printenv | egrep -v '^(_|PWD|PHP)' | awk -F '=' '{print "export "$1"=\""$2"\""}' >> /etc/environment
 
 exec "$@"
 
