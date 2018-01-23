@@ -59,7 +59,7 @@ if [ -n "${SERVICE_PATH}" ]; then
 fi
 
 # store env for reuse by cron
-printenv | sed 's/^\(.*\)$/export \1/g' >> /etc/environment
+printenv | egrep -v '^(_|PWD|PHP)' | awk -F '=' '{print "export "$1"=\""$2"\""}' >> /etc/environment
 
 exec "$@"
 
