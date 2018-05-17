@@ -3,44 +3,18 @@
 # Enable debugging
 if [ ! -z "$DEBUG" ]; then
     set -x
-    env
 fi
 
-# Set up environment
-. apt-init.sh
-. oci-init.sh
-. project-init.sh
-. apache-init.sh
-. crunz-init.sh
+export WORKDIR="$(readlink -f .)"
 
-## install project with git
-if [ "$PROJECT_VCS_METHOD" = git ]; then
-    if [ -n "$PROJECT_VCS_URL" ]; then
-        git clone -b "$PROJECT_VCS_BRANCH" "$PROJECT_VCS_URL" "$(readlink -m .)"
-        if [ -f "./composer.json" ]; then
-            composer update
-        fi
-    fi
-
-## install project with composer
-else
-    if [ ! -z "$PROJECT_NAME" ]; then
-        /usr/bin/composer create-project \
-          --stability=dev \
-          --prefer-source \
-          --no-interaction \
-          --keep-vcs \
-          $PROJECT_REPO/$PROJECT_NAME:dev-$PROJECT_VCS_BRANCH "$(readlink -m ..)"
-    fi
-fi
+# Import apache env vars
+. $APACHE_ENVVARS
 
 # Insure proper permissions
-chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$(readlink -m ..)"
+chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP "$(readlink -f ..)"
 
-# Enable StrictHostKeyChecking (disabled in project-init)
-if [ -f $HOME/.ssh/config ]; then
-    sed -i "s/StrictHostKeyChecking no/StrictHostKeyChecking yes/"  $HOME/.ssh/config
-fi
+# store env 
+printenv | egrep -v '^(_|PWD|PHP)' | awk -F '=' '{print $1"=\""$2"\""}' >> /etc/environment
 
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
@@ -48,3 +22,4 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 exec "$@"
+
