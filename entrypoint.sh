@@ -8,14 +8,6 @@ fi
 # set workdir variable internally
 export WORKDIR="$(readlink -f .)"
 
-# copy /configs files
-configs="$(find /configs/ -type f -exec ls  {} \; 2> /dev/null | awk  '!/\/\./{print substr($0,9)}')"
-if [ -n "$configs" ]; then 
-    for config in $configs; do
-        cp --preserve=all "/configs/${config}" "${config}"
-    done;
-fi
-
 # Import apache env vars
 . $APACHE_ENVVARS
 
