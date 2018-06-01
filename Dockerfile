@@ -1,4 +1,5 @@
-FROM php:7-apache
+FROM node:stretch
+FROM php:stretch-apache
 
 LABEL MAINTAINER="Greg Junge <gregnuj@gmail.com>"
 
